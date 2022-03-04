@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr.css';
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+// html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.src{
+    align-items: flex-end;
+    justify-content: end;
+}
+
+.mat-dialog-container {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+  }
+  
+  .doc-viewer-new .container
+  {
+      max-width: 100% !important;
+      padding: 0 !important;
+  }
+  .required-astrick:after {
+      content: " *";
+      color: red;
+  }
+  .no-data-available {
+      padding: 0px;
+      font-size: 14px;
+      font-weight: 700;
+      background-color: #fff;
+      color:#c3b9b9;
+      text-align: center;
+      margin-top: 10px;
+  }
+  
+  .visible-no-data-available {
+      display: flex !important;
+  }
+
+ 
+  

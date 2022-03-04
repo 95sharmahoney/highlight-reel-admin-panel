@@ -1,0 +1,141 @@
+.pagination {
+    float        : right;
+    padding-right: 4px;
+}
+table.full-wid.mat-table th {
+    font-weight   : bold !important;
+    color         : #000;
+    text-transform: capitalize;
+    font-size     : 14px;
+    letter-spacing: .5px;
+}
+table.mat-table {
+    width: 100%;
+}
+table.mat-table .mat-header-row thead {
+    background: red !important;
+}
+.make-ellipse {
+    display: flex;
+}
+.make-ellipse mat-icon {
+    font-size: 20px;
+    margin-left: 5px;
+}
+.srch {
+    display: flex;
+}
+.src{
+    align-items: flex-end;
+    justify-content: end;
+}
+.title-src {
+    display: flex;
+    background: #eee;
+    align-items: center;
+    border-radius: 3px;
+    padding: 0px 20px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+   
+}
+tr.mat-header-row th.mat-header-cell {
+    padding: 10px 1px;
+}
+tr.mat-header-row {
+    height: auto;
+}
+.mat-table tr th.mat-header-cell:nth-child(1) {
+    padding-left: 23px !important;
+}
+.srch mat-icon.mat-icon {
+    position: relative;
+    top: -2px;
+}
+.mat-form-field-infix {
+    padding: 3px !important;
+    margin-top: 0px !important;
+
+}
+
+.mat-form-field-wrapper {position: relative;top: 3px;}
+
+tr.mat-header-row {
+    background: #eee;
+}
+span.view-btn {
+    cursor: pointer;
+}
+th.mat-header-cell {
+    text-align: left;
+    position: sticky;
+    top: 0;
+    background: #eee;
+    z-index: 9;
+}
+.table-height{
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #333!important;
+}
+
+.main-title {
+    margin-bottom: 0;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+.btn-primary {
+    background-color: #FCE101;
+    border-color: #FCE101;
+    color: #000;
+    border-radius: 10px;
+    line-height: normal;
+    padding: 8px 20px;
+    float: right;
+}
+.btn-primary:hover {
+    background-color: #000;
+      color: #fff;
+      border-color: #000;
+}
+.custom-lg{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footbtn{
+    display: flex;
+    justify-content: space-between;
+}
+.modal-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: none !important;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 69% !important;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+.mat-paginator, .mat-paginator-page-size .mat-select-trigger {
+
+    font-size: 14px;
+}

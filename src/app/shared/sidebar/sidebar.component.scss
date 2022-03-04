@@ -1,0 +1,73 @@
+.sidebar-header .toggle-icon.ms-auto {
+    display: none;
+}
+// .logo-icon {
+//     width: 145px;
+// }
+.sm-logo-icon{
+    width: 65px;
+}
+.logo-icon[_ngcontent-rwn-c108] {
+    width: 65px;
+}
+.sidebar .navigation li.active > a {
+    color: #000;
+    text-decoration: none;
+    background: lightgray;
+}
+.sidebar .navigation li:hover > a {
+    color: #333;
+    text-decoration: none;
+    background: rgb(211 211 211);
+}
+
+.logo-text {
+    float: left;
+    font-size: 22px;
+    color: #D85B00;
+    font-weight: bold;
+    position: relative;
+    left: 10px;
+    top: 6px;
+}
+.sidebar-header .toggle-icon.ms-auto {
+    display: none;
+}
+.logo-icon {
+    width: 64px;
+}
+.sidebar .navigation {
+    padding : 0;
+}
+
+.sidebar li:first-child, .sidebar li + li {
+    margin-top: 0;
+}
+
+.sidebar .navigation li.active a{
+    color: #D85B00;
+    text-decoration: none;background: none !important;
+   
+}
+.sidebar li:hover a.ng-star-inserted {
+     color: #D85B00  !important;
+    text-decoration: none;
+    background: none !important;
+   
+}
+.sidebar li:hover ul.menu-content.ng-star-inserted li a{  color: #000  !important; text-decoration: none;}
+.sidebar li:hover ul.menu-content.ng-star-inserted li:hover a{  color: #D85B00  !important; text-decoration: none; }
+
+.sidebar .navigation li ul {
+    padding: 0;
+    border: none;
+}
+.sidebar .navigation li.open > a {
+    color: rgba(0, 0, 0, 0.65);
+    text-decoration: none;
+    background: none;
+}
+.sidebar .navigation li.open > a {
+    color: rgba(0, 0, 0, 0.65) !important;
+    text-decoration: none;
+}

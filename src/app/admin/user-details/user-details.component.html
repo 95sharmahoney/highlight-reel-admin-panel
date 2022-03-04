@@ -1,0 +1,70 @@
+<div fxLayout="row wrap" fxLayoutAlign="start">
+   <div class="header accent bg-colors" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+      fxLayoutAlign.gt-xs="start center">
+
+   </div>
+   <div class="btn-bck mb-4">
+      <a [routerLink]="['/admin/user-management']" class="back-btn" mat-raised-button mat-button-sm>
+         <mat-icon>keyboard_backspace</mat-icon>
+         Back
+      </a>
+   </div>
+   <div fxFlex.gt-md="100" fxFlex.gt-sm="100" fxFlex="100">
+      <div class="user-content">
+         <mat-card>
+            <h4 class="first-cap">Personal Information</h4>
+               <div class="user-info" id="u-info">
+                  <div class="row">
+                     <div class="col-2"><b>Name </b></div>
+                     <div class="col-1"><b>: </b></div>
+                     <div class="col-8">
+                        <p>{{userDetail.firstName}} {{userDetail.lastName}}</p>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-2"><b>Email </b></div>
+                     <div class="col-1"><b>: </b></div>
+                     <div class="col-8">
+                        <p style="text-transform: unset !important;">{{userDetail.email}} </p>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-2"><b>Gander </b></div>
+                     <div class="col-1"><b>: </b></div>
+                     <div class="col-8">
+                        <p>{{userDetail.gender}} </p>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-2"><b>DOB </b></div>
+                     <div class="col-1"><b>: </b></div>
+                     <div class="col-8">
+                        <p>{{userDetail.dob}} </p>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-2"><b>Age </b></div>
+                     <div class="col-1"><b>: </b></div>
+                     <div class="col-8">
+                        <p>{{userDetail.age}} </p>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-2"><b>Preferred Language </b></div>
+                     <div class="col-1"><b>: </b></div>
+                     <div class="col-8">
+                        <p>{{userDetail.preferredLanguage}} </p>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-2"><b>Firmware Upgrades </b></div>
+                     <div class="col-1"><b>: </b></div>
+                     <div class="col-8">
+                        <p>{{userDetail.firmwareUpgrades}} </p>
+                     </div>
+                  </div>
+               </div>
+         </mat-card>
+      </div>
+   </div>
+</div>

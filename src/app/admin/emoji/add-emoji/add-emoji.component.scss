@@ -1,0 +1,76 @@
+h4.card-heading {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  color: #000;
+  background: #fff;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.mat-icon-button {
+  padding: 0;
+  min-width: 0;
+  width: 33px;
+  height: 54px;
+  background-color: antiquewhite;
+  flex-shrink: 0;
+  line-height: 40px;
+  border-radius: 0%;
+}
+.form-group {
+  margin-bottom: 1.6rem;
+}
+.mat-card {
+  padding: 30px;
+}
+label {
+  margin-bottom: 7px;
+}
+
+.sub-menu1 {
+  color: #d85b00;
+}
+
+.mat-btn {
+  background-color: #fce101;
+  border-color: #fce101;
+  color: #000;
+  font-size: 17px;
+  padding: 8px 30px;
+  font-weight: normal;
+  line-height: normal;
+  height: auto;
+}
+.mat-btn:hover {
+  background-color: #d85b00;
+  border-color: #d85b00;
+  color: #fff;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.required {
+  color: red;
+}
+span.validation_msg {
+  color: #fd021b;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+input#image {
+  width: 100%;
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 1px 1px 1px #ccc;
+}

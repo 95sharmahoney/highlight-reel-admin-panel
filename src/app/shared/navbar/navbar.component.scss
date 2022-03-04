@@ -1,0 +1,34 @@
+
+ul.dropdown-menu.dropdown-menu-end.show li a {
+    padding: 7px 15px;
+    cursor: pointer;
+}
+
+i.bx.bx-chevron-down.icon-downs {
+    color: #000;
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+.topbar .navbar .dropdown-menu::after {
+    content: "";
+    width: 13px;
+    height: 13px;
+    top: -8px;
+    z-index: -999;
+
+}
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #fff;
+    background-color: #000;
+}
+
+ul.dropdown-menu.dropdown-menu-end.show {
+    padding: 0;
+}
+.user-info .designattion {
+    font-size: 15px;
+    color: #000;
+    letter-spacing: normal;
+    font-weight: 600;
+}

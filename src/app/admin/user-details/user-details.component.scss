@@ -1,0 +1,51 @@
+.header.accent.bg-colors {
+    background: #e3e6e0;
+    width: 100% !important;
+}
+.btn-back {
+    padding        : 15px 15px 0px 15px;
+    display        : flex;
+    justify-content: space-between;
+}
+.mat-raised-button .mat-button-sm{
+    color: #6c757d;
+}
+
+.user-content p {
+    text-align: justify;
+}
+
+.first-cap {
+    text-transform: capitalize;
+}
+
+.user-info {
+    border       : 1px solid #ccc;
+    padding      : 15px;
+    border-radius: 4px;
+}
+
+div#u-info .col-8 p {
+    text-transform: capitalize !important;
+}
+.user-content p {
+    text-align: justify;
+}
+div#u-info b {
+    color: #333;
+    font-weight: 500;
+}
+div#u-info .row {
+    margin-bottom: 5px;
+}
+.btn-bck.mb-4 a {
+    background: lightgray;
+}
+.btn-bck.mb-4 a:hover {
+    color:white !important;
+}
+h4.first-cap {
+    font-weight: 700;
+    color: #333;
+}
+

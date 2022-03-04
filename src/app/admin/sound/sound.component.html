@@ -1,0 +1,130 @@
+<div class=" pt-2 pb-2" style="align-items: baseline;">
+    <h3 class="page-title" class="main-title">Sounds </h3>
+</div>
+<div class=" pt-2 pb-2" style="align-items: baseline;">
+    <div class="title-src">
+        <div class="col-sm-9">
+            <!-- <h4 class="page-title" style="margin-bottom: 0px !important;">Staff List</h4> -->
+            <mat-form-field class="full-wid search-wid own-clas set-search-box-matField" floatLabel="never">
+                <div class="srch">
+                    <input matInput placeholder="Search" [(ngModel)]="selection.search" class="search_input"
+                        (change)='updateFilter()'>
+                    <mat-icon
+                        class="edit-color search-icon mat-icon notranslate ng-tns-c31-16 material-icons mat-icon-no-color"
+                        role="img" style="cursor: pointer;" aria-hidden="true" (click)="updateFilter()">search
+                    </mat-icon>
+                </div>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-3">
+            <div class="d-flex src">
+                <div class="col-sm-6">
+                    <a  (click)="add()" class="btn btn-primary float-right">Add Sound</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="user-manage-list">
+
+    <mat-card class="footer-adjust">
+        <div class="table-responsive">
+            <div class="table-height">
+                <table mat-table class="full-wid" [dataSource]="userData">
+                    <ng-container matColumnDef="sNo">
+                        <th mat-header-cell *matHeaderCellDef>#</th>
+                        <td mat-cell *matCellDef="let element; let i = index">
+                            {{ (i+1) + (paginator.pageIndex * paginator.pageSize) }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="firstname">
+                        <th mat-header-cell *matHeaderCellDef>Tittle</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div fxLayoutAlign="start center">
+                                <div class="make-ellipse">{{element.title}} </div>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="gif">
+                        <th mat-header-cell *matHeaderCellDef>Sound</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div fxLayoutAlign="start center" *ngIf="showPlayer">
+                                <!-- <img [src]="element.path" /> -->
+                                <audio  controls  class="playa" di="audio">
+                                    <source [src]="element.path" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                  </audio>                        
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="updationDate">
+                        <th mat-header-cell *matHeaderCellDef>Date</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div fxLayoutAlign="start center">
+                                <div class="make-ellipse">{{element.createdAt | date:'d MMM y'}} </div>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                   
+                    <ng-container matColumnDef="view">
+                        <th mat-header-cell *matHeaderCellDef>View</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div fxLayoutAlign="start center">
+                                <div class="make-ellipse">
+                                    <span class="view-btn" matTooltip="View" mat-button
+                                    (click)="view(element._id)"    title="View Profile" matTooltip="View">
+                                        <mat-icon>remove_red_eye</mat-icon>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Delete</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div fxLayoutAlign="start center">
+                                    <div class="make-ellipse">
+                                        <span class="view-btn"  matTooltip="View" mat-button (click)="openPopup(element._id)" title="View Profile" matTooltip="View">
+                                            <mat-icon class="light">delete</mat-icon>
+                                    </span>
+                                    </div>
+                            </div>
+                        </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" class="no-data-available" *ngIf="userData.length === 0">No
+                Data Available
+            </div>
+            <div class="pagination">
+                <mat-paginator #paginator [length]="noOfRecors" [pageSize]="selection.size"
+                    [pageSizeOptions]="[10, 25, 50]" (page)="getPaginatorData($event)"></mat-paginator>
+            </div>
+        </div>
+
+    </mat-card>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+	<div class="modal-dialog  modal-dialog-scrollable custom-lg" role="document">
+	  <div class="modal-content p-3">
+		<div class="modal-header">
+		  <h3 class="modal-title">Do you really want to delete this User?</h3>
+		</div>
+		
+		<div class="footbtn">
+		  <button mat-raised-button type="button" class="btn-dark" (click)="closePopup()">Back</button>
+		  <button type="button" mat-raised-button color="warn" (click)="onDelete()">Submit</button>
+  
+		</div>
+	  </div>
+	</div>
+  </div>

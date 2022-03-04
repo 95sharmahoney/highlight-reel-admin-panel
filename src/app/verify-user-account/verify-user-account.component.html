@@ -1,0 +1,40 @@
+<div class="bg-login">
+	<!--wrapper-->
+	<div class="wrapper">
+		<div class="sqaure"></div>
+		<div class="sqaure1"></div>
+		<div class="sqaure2"></div>
+		<div class="sqaure3"></div>
+		<div class="sqaure4"></div>
+		<div class="sqaure5"></div>
+		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+			<div class="container-fluid">
+				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2">
+					<div class="col-md-6 mx-auto expire-msg" *ngIf="status == 0">
+						<div class="col-md-6 set-icon">
+							<mat-icon>sentiment_dissatisfied</mat-icon>
+							<h2><span>Sorry,</span> this verify account link is <br> no longer valid due to one of <br>
+								the following
+								reasons:</h2>
+							<ul class="resons">
+								<li>it has already been used. </li>
+								<li>it has expired or has been cancelled.</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6 mx-auto succ-msg" *ngIf="status == 1">
+						<div class="col-md-6 set-icon sucs">
+							<mat-icon> verified_user </mat-icon>
+							<h2 style="color: #85cd85;">You're Verified.</h2>
+							<h2><span>Congratulation,</span> Your account has been successfully verified.<br> Thank you
+								for helping us battle catfishers and scammers.<br> You're a part of the solution.</h2>
+							<!-- <ul class="resons">
+								<li>it has already been used. </li>
+								<li>it has expired or has been cancelled.</li>
+							</ul> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

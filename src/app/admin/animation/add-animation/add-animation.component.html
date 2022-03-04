@@ -1,0 +1,37 @@
+<div class="mat-new">
+    <h4 class="card-heading">
+      <button mat-icon-button (click)="goBack()" ><mat-icon>chevron_left</mat-icon> </button>
+     Animation<span class="sub-menu1"> > Add Animation </span>
+    </h4>
+  </div>
+  <mat-card>
+    <div class="top-br">
+      <form [formGroup]="addGifForm">
+  
+        <div class="row">
+            <div class="form-group col-md-12">
+               <label for="position">Title<span class="required">*</span></label>
+               <input id="title" type="text" class="form-control" maxlength="100" formControlName="title"
+               placeholder="Title">
+                <span class="validation_msg"
+                    *ngIf="f.title.errors && f.title.errors.required && isError">Please Enter Title</span>
+            </div>
+           
+        </div> 
+
+        
+        <div class="row">
+            <div class="form-group">
+                <label class="form-label">Upload<span class="required">*</span></label>
+                
+                <input type="file" accept=".gif" #inputFile id="image" (change)="onSelectDoc($event)"> 
+                <span class="validation_msg" *ngIf="!isDoc && isError" >Document is required</span>  
+              </div>
+        </div> 
+
+        <button mat-raised-button *ngIf="!id" class="mat-btn" (click)="add()">Submit</button>
+        <!-- <button mat-raised-button *ngIf="id" class="mat-btn" (click)="update()">Update </button> -->
+  
+      </form>
+    </div>
+  </mat-card>
