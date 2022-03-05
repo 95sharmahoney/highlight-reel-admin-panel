@@ -23,7 +23,7 @@ export class Links {
 
     //STAFF
     public static USER_STAFF = Links.BASE + '/web/api/admin/get_all_staff';
-    public static ADD_STAFF = Links.BASE + '/web/api/admin/signup';
+    public static ADD_STAFF = Links.BASE + '/web/api/admin/register_staff';
     public static GET_Staff_BY_ID = Links.BASE + '/web/api/admin/get_staff_by_id';
     public static UPDATE_STAFF = Links.BASE + '/web/api/admin/edit_staff';
 

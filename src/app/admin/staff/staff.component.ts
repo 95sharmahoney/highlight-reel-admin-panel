@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 export class StaffComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo', 'firstname',  'email', 'updationDate',   'action'];
+  displayedColumns: string[] = ['sNo', 'firstname', 'email', 'updationDate', 'action'];
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
 
@@ -52,7 +52,7 @@ export class StaffComponent implements OnInit {
       if (res.message == 'Data fetched successfully') {
         this.userData = res.data
         // console.log(this.userData,'juned');
-        
+
         this.noOfRecors = res.totalUser
       } else {
         this.toastr.error(res.message);
@@ -96,7 +96,7 @@ export class StaffComponent implements OnInit {
   addStaff() {
     this.router.navigate(['admin/staff/add-staff']);
   }
-  viewStaff(userId:any){
-    this.router.navigate(['admin/staff/view-staff'], {queryParams:{id:userId}})
+  viewStaff(userId: any) {
+    this.router.navigate(['admin/staff/view-staff'], { queryParams: { id: userId } })
   }
 }
