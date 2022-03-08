@@ -6,7 +6,7 @@ export class Links {
 
     public static LOGIN = Links.BASE + '/web/api/admin/login';
     public static DASHBOARD_COUNT = Links.BASE + '/admin/dashborad-count';
-    public static CHANGE_PASSWORD = Links.BASE + '/admin/change-password';
+    public static CHANGE_PASSWORD = Links.BASE + '/web/api/admin/change_password';
     public static FORGOT_PASSWORD = Links.BASE + '/admin/forgot-password';
     public static RESET_PASSWORD = Links.BASE + '/admin/reset-password';
     public static VERIFY_RESET_PASSWORD_REQUEST = Links.BASE + '/admin/verify-reset-password-request';

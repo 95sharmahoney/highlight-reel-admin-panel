@@ -20,7 +20,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 
 export class UserManagementComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo', 'firstname', 'lastname', 'email', 'phoneNumber','videosCount',  'status', 'action'];
+  displayedColumns: string[] = ['sNo', 'firstname', 'lastname', 'email', 'phoneNumber','videosCount',  'status', ];
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
   displayStyle: any = "none";
@@ -53,8 +53,6 @@ export class UserManagementComponent implements OnInit {
       this.threeDService.hide();
       if (res.message == 'Data fetched successfully') {
         this.userData = res.data
-        console.log(this.userData,'juned');
-        
         this.noOfRecors = res.totalUser
       } else {
         this.toastr.error(res.message);

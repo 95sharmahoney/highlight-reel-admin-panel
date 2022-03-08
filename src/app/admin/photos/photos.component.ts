@@ -101,6 +101,7 @@ export class PhotosComponent implements OnInit {
   add() {
     this.router.navigate(['admin/photo/add-photo']);
   }
+
   view(userId:any){
     this.router.navigate(['admin/photo/view-photo'], {queryParams:{id:userId}})
   }

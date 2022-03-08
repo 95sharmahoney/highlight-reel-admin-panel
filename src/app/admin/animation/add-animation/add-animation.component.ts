@@ -20,7 +20,7 @@ export class AddAnimationComponent implements OnInit {
   docUrl: string | undefined;
   addGifForm: FormGroup = new FormGroup({});
   id: any;
-
+  values: any= [];
   constructor(private fb: FormBuilder, private router: Router,
     private toastr: ToastrService, private route: ActivatedRoute,  private threeDService: ThreeDServiceService, public authService: AuthService
     ){
@@ -34,10 +34,10 @@ export class AddAnimationComponent implements OnInit {
     this.id = this.route.snapshot.queryParamMap.get('id');
     this.authService.getTransitionById(this.id).subscribe(
       res => {
-        let values = res.data
+        this.values = res.data
         this.addGifForm.patchValue({
-          title: values.title,
-          files: values.path,
+          title: this.values.title,
+          files: this.values.path,
         })
       }
     )

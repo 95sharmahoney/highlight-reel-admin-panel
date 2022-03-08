@@ -1,10 +1,14 @@
 <div class="mat-new">
-    <h4 class="card-heading">
+    <h4 class="card-heading" *ngIf="!id">
       <button mat-icon-button (click)="goBack()" ><mat-icon>chevron_left</mat-icon> </button>
       Photo<span class="sub-menu1"> > Add Photo </span>
     </h4>
+    <h4 class="card-heading" *ngIf="id">
+      <button mat-icon-button (click)="goBack()" ><mat-icon>chevron_left</mat-icon> </button>
+      Photo<span class="sub-menu1"> > View Photo </span>
+    </h4>
   </div>
-  <mat-card>
+  <mat-card *ngIf="!id">
     <div class="top-br">
       <form [formGroup]="addEmojiForm">
   
@@ -29,9 +33,40 @@
               </div>
         </div> 
 
-        <button mat-raised-button *ngIf="!id" class="mat-btn" (click)="add()">Submit</button>
-        <!-- <button mat-raised-button *ngIf="id" class="mat-btn" (click)="update()">Update </button> -->
+        <button mat-raised-button *ngIf="!id" class="mat-btn" (click)="addPhoto()">Submit</button>
   
       </form>
     </div>
   </mat-card>
+
+
+
+  <div fxLayout="row wrap" fxLayoutAlign="start" *ngIf="id">
+    <div class="header accent bg-colors" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+       fxLayoutAlign.gt-xs="start center">
+ 
+    </div>
+    
+    <div fxFlex.gt-md="100" fxFlex.gt-sm="100" fxFlex="100">
+       <div class="user-content">
+          <mat-card>
+                <div class="user-info" id="u-info">
+                   <div class="row">
+                      <div class="col-2"><b>Title </b></div>
+                      <div class="col-1"><b>: </b></div>
+                      <div class="col-8">
+                         <p>{{userDetail.title}} </p>
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-2"><b>Upload </b></div>
+                      <div class="col-1"><b>: </b></div>
+                      <div class="col-8">
+                         <img [src]="userDetail.path" width="500px" height="500px" />
+                      </div>
+                   </div>
+                </div>
+          </mat-card>
+       </div>
+    </div>
+ </div>

@@ -19,6 +19,7 @@ export class AddMusicComponent implements OnInit {
   docUrl: string | undefined;
   addEmojiForm: FormGroup = new FormGroup({});
   id: any;
+  values:any = [];
 
   constructor(private fb: FormBuilder, private router: Router,
     private toastr: ToastrService, private route: ActivatedRoute,  private threeDService: ThreeDServiceService, public authService: AuthService
@@ -33,11 +34,11 @@ export class AddMusicComponent implements OnInit {
     this.id = this.route.snapshot.queryParamMap.get('id');
     this.authService.getTransitionById(this.id).subscribe(
       res => {
-        let values = res.data
-        this.addEmojiForm.patchValue({
-          title: values.title,
-          files: values.path,
-        })
+         this.values = res.data
+        // this.addEmojiForm.patchValue({
+        //   title: this.values.title,
+        //   files: this.values.path,
+        // })
       }
     )
   }
@@ -72,7 +73,7 @@ export class AddMusicComponent implements OnInit {
     }
   }
 
-  update(){}
+
 
   onSelectDoc(e:any) {
     var file = e.target.files[0]

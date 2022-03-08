@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Input,OnChanges, SimpleChange } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/service/auth.service';
 import { ThreeDServiceService } from 'src/app/service/three-dservice.service';
@@ -19,7 +19,9 @@ export class AddSoundComponent implements OnInit {
   docUrl: string | undefined;
   addGifForm: FormGroup = new FormGroup({});
   id: any;
-
+  values:any =[];
+  showPlayer: boolean = false; 
+  @Input() fileToPlay:string | undefined ;
   constructor(private fb: FormBuilder, private router: Router,
     private toastr: ToastrService, private route: ActivatedRoute,  private threeDService: ThreeDServiceService, public authService: AuthService
     ){
@@ -29,18 +31,34 @@ export class AddSoundComponent implements OnInit {
     })
    }
 
+ 
+
   ngOnInit(): void {
+   
     this.id = this.route.snapshot.queryParamMap.get('id');
     this.authService.getTransitionById(this.id).subscribe(
       res => {
-        let values = res.data
-        this.addGifForm.patchValue({
-          title: values.title,
-          files: values.path,
-        })
+         this.values = res.data
+         console.log(this.values,'------');
+         
+        // this.addEmojiForm.patchValue({
+        //   title: this.userDetail.title,
+        //   files: this.userDetail.path,
+        // })
       }
     )
+     if (this.fileToPlay != '') {
+      this.showPlayer = true;
+    }
   }
+
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}){
+
+    if(changes['fileToPlay'].previousValue !== changes['fileToPlay'].currentValue && changes['fileToPlay'].currentValue !== '') {
+     this.showPlayer = false;
+     setTimeout(() => this.showPlayer = true, 0);
+   }
+ }
 
   public get f() {
     return this.addGifForm.controls;
@@ -72,7 +90,7 @@ export class AddSoundComponent implements OnInit {
     }
   }
 
-  update(){}
+
 
   onSelectDoc(e:any) {
     var file = e.target.files[0]

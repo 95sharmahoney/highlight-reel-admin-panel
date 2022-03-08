@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 export class StaffComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo', 'firstname', 'email', 'updationDate', 'action'];
+  displayedColumns: string[] = ['sNo', 'firstname', 'email', 'updationDate', 'status', 'action'];
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
 
@@ -87,6 +87,38 @@ export class StaffComponent implements OnInit {
   //     console.log(error);
   //   })
   // }
+
+  changeUserStatus(e:any,id:any){
+    if(e.checked){
+      this.authService.changeUserStatus(id,'active').subscribe(
+        res =>{
+          if(res.message == 'User status updated successfully'){
+            this.toastr.success(res.message)
+          } else {
+            this.toastr.error(res.message)
+          }
+        },
+        err =>{
+          console.log(err,'errorr');
+          this.toastr.error('Error Occured.')
+        }
+      )
+    }
+    else {
+      this.authService.changeUserStatus(id,'inActive').subscribe(
+        res =>{
+          if(res.message == 'User status updated successfully'){
+            this.toastr.success(res.message)
+          } else {
+            this.toastr.error(res.message)
+          }
+        },
+        err =>{
+          this.toastr.error('Error Occured.')
+        }
+      )
+    }
+  }
 
   // viewProfile(userId: any) {
   //   localStorage.setItem("userId", userId)

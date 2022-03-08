@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
     }
     logout(){
         sessionStorage.removeItem('adminDetail');
-        sessionStorage.removeItem('adminId');
+        sessionStorage.removeItem('authToken');
         this.router.navigate(['sign-in']);
     }
     changePassword(){

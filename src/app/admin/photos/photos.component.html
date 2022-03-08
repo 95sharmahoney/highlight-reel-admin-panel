@@ -72,7 +72,7 @@
                             <div fxLayoutAlign="start center">
                                 <div class="make-ellipse">
                                     <span class="view-btn" matTooltip="View" mat-button
-                                    (click)="view(element._id)"    title="View Profile" matTooltip="View">
+                                    (click)="view(element._id)" [routerLink]="['/admin/photo/view-photo']"   title="View Profile" matTooltip="View">
                                         <mat-icon>remove_red_eye</mat-icon>
                                     </span>
                                 </div>

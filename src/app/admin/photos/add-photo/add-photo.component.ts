@@ -20,7 +20,8 @@ export class AddPhotoComponent implements OnInit {
   docUrl: string | undefined;
   addEmojiForm: FormGroup = new FormGroup({});
   id: any;
-
+  userId:any;
+  userDetail: any= [];
   constructor(private fb: FormBuilder, private router: Router,
     private toastr: ToastrService, private route: ActivatedRoute,  private threeDService: ThreeDServiceService, public authService: AuthService
     ){
@@ -31,23 +32,25 @@ export class AddPhotoComponent implements OnInit {
    }
 
   ngOnInit(): void {
+   
     this.id = this.route.snapshot.queryParamMap.get('id');
     this.authService.getTransitionById(this.id).subscribe(
       res => {
-        let values = res.data
-        this.addEmojiForm.patchValue({
-          title: values.title,
-          files: values.path,
-        })
+         this.userDetail = res.data
+        // this.addEmojiForm.patchValue({
+        //   title: this.userDetail.title,
+        //   files: this.userDetail.path,
+        // })
       }
     )
   }
+
 
   public get f() {
     return this.addEmojiForm.controls;
   }
 
-  add(){
+  addPhoto(){
     if (this.addEmojiForm.invalid) {
       this.isError = true;
     } else {
