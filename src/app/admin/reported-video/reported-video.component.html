@@ -57,7 +57,15 @@
 						</div>
 					</td>
 				</ng-container>
-
+				
+				<ng-container matColumnDef="ReportedAt">
+					<th mat-header-cell *matHeaderCellDef>Reported At</th>
+					<td mat-cell *matCellDef="let element">
+						<div fxLayoutAlign="start center">
+							<div class="make-ellipse">{{element.ReportedAt}} </div>
+						</div>
+					</td>
+				</ng-container>
 				<ng-container matColumnDef="ReportedBy">
 					<th mat-header-cell *matHeaderCellDef>Reported By</th>
 					<td mat-cell *matCellDef="let element">

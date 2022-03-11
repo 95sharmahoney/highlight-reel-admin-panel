@@ -16,7 +16,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 export class ReportedVideoComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo', 'updationDate', 'Reported', 'posted', 'ReportedBy','view', 'action'];
+  displayedColumns: string[] = ['sNo', 'updationDate', 'Reported', 'posted','ReportedAt', 'ReportedBy','view', 'action'];
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
   displayStyle: any = "none";

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { fadeInAnimation } from './../../service/route.animation';
 import { data } from 'jquery';
@@ -7,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/service/auth.service';
 import { ThreeDServiceService } from 'src/app/service/three-dservice.service';
 import { Router } from '@angular/router';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-emoji',
@@ -15,8 +16,9 @@ import { Router } from '@angular/router';
 })
 export class EmojiComponent implements OnInit {
 
-  @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo', 'updationDate','firstname', 'gif', 'view','action'];
+  @ViewChild(MatSort) sort: MatSort | undefined;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+  displayedColumns: string[] = ['sNo','firstname', 'updationDate', 'gif','status', 'view',];
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
   displayStyle: any = "none";
@@ -28,23 +30,44 @@ export class EmojiComponent implements OnInit {
 
   ngOnInit(): void {
     // debugger
-    this.selection = { "page": 0, "size": 10, search: '' };
-    let selection: any = sessionStorage.getItem("selection");
-    selection = JSON.parse(selection);
-    if (selection) {
-      this.selection.page = selection.page;
-      this.selection.size = selection.size;
-      this.selection.search = selection.search;
-      this.paginator.pageIndex = selection.page;
-      this.paginator.pageSize = selection.size;
-      sessionStorage.removeItem("selection");
-    }
+    // this.selection = { "page": 0, "size": 10, search: '' };
+    // let selection: any = sessionStorage.getItem("selection");
+    // selection = JSON.parse(selection);
+    // if (selection) {
+    //   this.selection.page = selection.page;
+    //   this.selection.size = selection.size;
+    //   this.selection.search = selection.search;
+    //   this.paginator.pageIndex = selection.page;
+    //   this.paginator.pageSize = selection.size;
+    //   sessionStorage.removeItem("selection");
+    // }
     this.getAllGif();
   }
   getAllGif() {
     this.userData = [];
     this.threeDService.show();
     this.authService.getAllGif("emoji").subscribe(res => {
+      this.threeDService.hide();
+      if (res.message == 'Data fetched successfully') {
+        this.userData = res.data
+        // console.log(this.userData,'juned');
+        this.userData.sort = this.sort;
+        this.userData.paginator = this.paginator;
+        this.noOfRecors = res.totalCount
+      } else {
+        this.toastr.error(res.message);
+      }
+    }, error => {
+      this.threeDService.hide();
+      this.toastr.error('Technical Issue.')
+      console.log(error);
+    })
+  }
+  searchFilter($event: any) {
+    console.log($event,'search');
+    this.userData = [];
+    this.threeDService.show();
+    this.authService.SearchTransition("emoji",$event).subscribe(res => {
       this.threeDService.hide();
       if (res.message == 'Data fetched successfully') {
         this.userData = res.data
@@ -68,7 +91,7 @@ export class EmojiComponent implements OnInit {
   }
   updateFilter() {
     this.selection.page = 0;
-    this.paginator.firstPage();
+    // this.paginator.firstPage();
     this.getAllGif();
   }
 
@@ -106,5 +129,38 @@ export class EmojiComponent implements OnInit {
   closePopup() {
     this.displayStyle = "none";
   }
+
+  changeUserStatus(e: any, id: any) {
+    if (e.checked) {
+      this.authService.statusTransition(id, 'active').subscribe(
+        res => {
+          if (res.success == true) {
+            this.toastr.success(res.message)
+          } else {
+            this.toastr.error(res.message)
+          }
+        },
+        err => {
+          console.log(err, 'errorr');
+          this.toastr.error('Error Occured.')
+        }
+      )
+    }
+    else {
+      this.authService.statusTransition(id, 'inActive').subscribe(
+        res => {
+          if (res.success == true) {
+            this.toastr.success(res.message)
+          } else {
+            this.toastr.error(res.message)
+          }
+        },
+        err => {
+          this.toastr.error('Error Occured.')
+        }
+      )
+    }
+  }
+
 }
 

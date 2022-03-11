@@ -1,20 +1,20 @@
 <div class=" pt-2 pb-2" style="align-items: baseline;">
 	<div class="title-src">
 		<div class="col-sm-9">
-			<h4 class="page-title" style="margin-bottom: 0px !important;">User Management</h4>
+			<mat-form-field class="full-wid search-wid own-clas set-search-box-matField" floatLabel="never">
+				<div class="srch">
+					<input matInput placeholder="Search" [(ngModel)]="selection.search" class="search_input"
+						(change)='updateFilter()'>
+					<mat-icon
+						class="edit-color search-icon mat-icon notranslate ng-tns-c31-16 material-icons mat-icon-no-color"
+						role="img" style="cursor: pointer;" aria-hidden="true" (click)="updateFilter()">search
+					</mat-icon>
+				</div>
+			</mat-form-field>
 		</div>
 		<div class="col-sm-3">
 			<div class="d-flex src">
-				<mat-form-field class="full-wid search-wid own-clas set-search-box-matField" floatLabel="never">
-					<div class="srch">
-						<input matInput placeholder="Search" [(ngModel)]="selection.search" class="search_input"
-							(change)='updateFilter()'>
-						<mat-icon
-							class="edit-color search-icon mat-icon notranslate ng-tns-c31-16 material-icons mat-icon-no-color"
-							role="img" style="cursor: pointer;" aria-hidden="true" (click)="updateFilter()">search
-						</mat-icon>
-					</div>
-				</mat-form-field>
+				
 			</div>
 		</div>
 	</div>
@@ -73,20 +73,16 @@
 						</td>
 					</ng-container>
 
-					<!-- <ng-container matColumnDef="status">
-					<th mat-header-cell *matHeaderCellDef>Status</th>
-					<td mat-cell *matCellDef="let element">
-						<div fxLayoutAlign="start center">
-							<div class="make-ellipse">
-								<mat-slide-toggle [checked]="element.status == 'active'" class="example-margin"
-										(change)="changeUserStatus(element._id ,$event)" color="primary">
-									</mat-slide-toggle>
-							</div>
-						</div>
-					</td>
-				</ng-container> -->
+					<ng-container matColumnDef="updationDate">
+                        <th mat-header-cell *matHeaderCellDef>Date</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div fxLayoutAlign="start center">
+                                <div class="make-ellipse">{{element.createdAt | date:'d MMM y'}} </div>
+                            </div>
+                        </td>
+                    </ng-container>
 					<ng-container matColumnDef="status">
-						<th mat-header-cell *matHeaderCellDef> Status </th>
+						<th mat-header-cell *matHeaderCellDef> Action </th>
 						<td mat-cell *matCellDef="let element">
 							<mat-slide-toggle [checked]="element.status == 'active'"
 								(change)="changeUserStatus($event,element._id)">

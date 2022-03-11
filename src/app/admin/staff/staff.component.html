@@ -1,6 +1,4 @@
-<div class=" pt-2 pb-2" style="align-items: baseline;">
-    <h3 class="page-title" class="main-title">Staff List</h3>
-</div>
+
 <div class=" pt-2 pb-2" style="align-items: baseline;">
     <div class="title-src">
         <div class="col-sm-9">
@@ -19,7 +17,7 @@
         <div class="col-sm-3">
             <div class="d-flex src">
                 <div class="col-sm-6">
-                    <a  (click)="addStaff()" class="btn btn-primary float-right">Add Staff</a>
+                    <a  (click)="addStaff()" class="btn btn-primary float-right" *ngIf="role=='admin' ">Add Staff</a>
                 </div>
             </div>
         </div>
@@ -45,7 +43,15 @@
                             </div>
                         </td>
                     </ng-container>
-
+                    
+                    <ng-container matColumnDef="lastName">
+                        <th mat-header-cell *matHeaderCellDef>Lastname</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div fxLayoutAlign="start center">
+                                <div class="make-ellipse">{{element.lastName}} </div>
+                            </div>
+                        </td>
+                    </ng-container>
                     <ng-container matColumnDef="email">
                         <th mat-header-cell *matHeaderCellDef>Email</th>
                         <td mat-cell *matCellDef="let element">
@@ -56,10 +62,10 @@
                     </ng-container>
 
                     <ng-container matColumnDef="updationDate">
-                        <th mat-header-cell *matHeaderCellDef>Date Modified</th>
+                        <th mat-header-cell *matHeaderCellDef>Date</th>
                         <td mat-cell *matCellDef="let element">
                             <div fxLayoutAlign="start center">
-                                <div class="make-ellipse">{{element.createdAt | date:'dd/MM/yyyy HH:mm'}} </div>
+                                <div class="make-ellipse">{{element.createdAt | date:'d MMM y'}} </div>
                             </div>
                         </td>
                     </ng-container>
@@ -67,18 +73,21 @@
                     <ng-container matColumnDef="status">
 						<th mat-header-cell *matHeaderCellDef> Status </th>
 						<td mat-cell *matCellDef="let element">
-							<mat-slide-toggle [checked]="element.status == 'active'"
+							<mat-slide-toggle  *ngIf="role =='admin' "  [checked]="element.status == 'active'"
+								(change)="changeUserStatus($event,element._id)">
+							</mat-slide-toggle>
+                            <mat-slide-toggle  *ngIf="role!='admin' " disabled [checked]="element.status == 'active'"
 								(change)="changeUserStatus($event,element._id)">
 							</mat-slide-toggle>
 						</td>
 					</ng-container>
                    
                     <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <th mat-header-cell *matHeaderCellDef  > <span  *ngIf="role=='admin' ">Action</span></th>
                         <td mat-cell *matCellDef="let element">
                             <div fxLayoutAlign="start center">
                                 <div class="make-ellipse">
-                                    <span class="view-btn" matTooltip="View" mat-button
+                                    <span class="view-btn" matTooltip="View" mat-button  *ngIf="role=='admin' "
                                         (click)="viewStaff(element._id)" title="View Profile" matTooltip="View">
                                         <mat-icon>remove_red_eye</mat-icon>
                                     </span>

@@ -28,4 +28,8 @@ export class FooterComponent implements OnInit {
              
      }
 
+     currentYearLong(): number {
+  return new Date().getFullYear();
+  }
+
 }

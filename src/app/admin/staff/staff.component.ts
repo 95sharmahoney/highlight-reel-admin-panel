@@ -20,9 +20,11 @@ import { Router } from '@angular/router';
 export class StaffComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo', 'firstname', 'email', 'updationDate', 'status', 'action'];
+  displayedColumns: string[] = ['sNo', 'firstname','lastName', 'email', 'updationDate', 'status', 'action'];
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
+  getDetail: any;
+  role: any;
 
   noOfRecors = 0;
   selection: any = 0;
@@ -33,6 +35,11 @@ export class StaffComponent implements OnInit {
     // debugger
     this.selection = { "page": 0, "size": 10, search: '' };
     let selection: any = sessionStorage.getItem("selection");
+    // this.getDetail = sessionStorage.getItem("adminDetail");
+    var getDetail = JSON.parse(sessionStorage.getItem('adminDetail') || '{}');
+     this.role=getDetail.role
+    console.log(this.role, 'role');
+
     selection = JSON.parse(selection);
     if (selection) {
       this.selection.page = selection.page;
@@ -88,32 +95,32 @@ export class StaffComponent implements OnInit {
   //   })
   // }
 
-  changeUserStatus(e:any,id:any){
-    if(e.checked){
-      this.authService.changeUserStatus(id,'active').subscribe(
-        res =>{
-          if(res.message == 'User status updated successfully'){
+  changeUserStatus(e: any, id: any) {
+    if (e.checked) {
+      this.authService.changeUserStatus(id, 'active').subscribe(
+        res => {
+          if (res.message == 'User status updated successfully') {
             this.toastr.success(res.message)
           } else {
             this.toastr.error(res.message)
           }
         },
-        err =>{
-          console.log(err,'errorr');
+        err => {
+          console.log(err, 'errorr');
           this.toastr.error('Error Occured.')
         }
       )
     }
     else {
-      this.authService.changeUserStatus(id,'inActive').subscribe(
-        res =>{
-          if(res.message == 'User status updated successfully'){
+      this.authService.changeUserStatus(id, 'inActive').subscribe(
+        res => {
+          if (res.message == 'User status updated successfully') {
             this.toastr.success(res.message)
           } else {
             this.toastr.error(res.message)
           }
         },
-        err =>{
+        err => {
           this.toastr.error('Error Occured.')
         }
       )

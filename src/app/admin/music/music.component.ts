@@ -16,7 +16,8 @@ import { Router } from '@angular/router';
 export class MusicComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo', 'updationDate','firstname', 'gif', 'view','action'];
+  displayedColumns: string[] = ['sNo','firstname', 'updationDate', 'gif','status', 'view',];
+
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
   displayStyle: any = "none";
@@ -46,7 +47,26 @@ export class MusicComponent implements OnInit {
       this.showPlayer = true;
     }
   }
-
+  searchFilter($event: any) {
+    console.log($event,'search');
+    this.userData = [];
+    this.threeDService.show();
+    this.authService.SearchTransition("music",$event).subscribe(res => {
+      this.threeDService.hide();
+      if (res.message == 'Data fetched successfully') {
+        this.userData = res.data
+        // console.log(this.userData,'juned');
+        
+        this.noOfRecors = res.totalUser
+      } else {
+        this.toastr.error(res.message);
+      }
+    }, error => {
+      this.threeDService.hide();
+      this.toastr.error('Technical Issue.')
+      console.log(error);
+    })
+  }
   ngOnChanges(changes: {[propKey: string]: SimpleChange}){
 
     if(changes['fileToPlay'].previousValue !== changes['fileToPlay'].currentValue && changes['fileToPlay'].currentValue !== '') {
@@ -120,5 +140,38 @@ export class MusicComponent implements OnInit {
   closePopup() {
     this.displayStyle = "none";
   }
+
+  changeUserStatus(e: any, id: any) {
+    if (e.checked) {
+      this.authService.statusTransition(id, 'active').subscribe(
+        res => {
+          if (res.success == true) {
+            this.toastr.success(res.message)
+          } else {
+            this.toastr.error(res.message)
+          }
+        },
+        err => {
+          console.log(err, 'errorr');
+          this.toastr.error('Error Occured.')
+        }
+      )
+    }
+    else {
+      this.authService.statusTransition(id, 'inActive').subscribe(
+        res => {
+          if (res.success == true) {
+            this.toastr.success(res.message)
+          } else {
+            this.toastr.error(res.message)
+          }
+        },
+        err => {
+          this.toastr.error('Error Occured.')
+        }
+      )
+    }
+  }
+
 }
 

@@ -20,7 +20,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 
 export class UserManagementComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo', 'firstname', 'lastname', 'email', 'phoneNumber','videosCount',  'status', ];
+  displayedColumns: string[] = ['sNo', 'firstname', 'lastname', 'email','updationDate', 'phoneNumber','videosCount',  'status', ];
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
   displayStyle: any = "none";

@@ -121,10 +121,13 @@ export class AddStaffComponent implements OnInit {
 
   updateStaffMember() {
     console.log(this.addStaffForm.value);
-      this.authService.updateStaff(this.id,this.addStaffForm.value).subscribe(
+    this.addStaffForm.value.userId = this.id;
+    console.log(this.addStaffForm.value.userId,'-===');
+    
+      this.authService.updateStaff(this.addStaffForm.value).subscribe(
         res => {
           console.log(res);
-          if(res.status == 'OK'){
+          if(res.success == true){
             this.threeDService.hide();
             this.router.navigate(['/admin/staff']);
             this.toastr.success(res.message);

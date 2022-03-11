@@ -106,16 +106,15 @@ export class AuthService {
     return this.http.post(Links.ADD_STAFF, form, httpOptions).pipe(map((response: any) => response));
   }
 
-  updateStaff(id: any, form: any) {
-    const data = {
-      userId: id,
-      first_name: form.first_name,
-      last_name: form.last_name,
-      phone_number: form.phone_number,
-      email: form.email,
-    }
+  updateStaff( form: any) {
+    const formData = new FormData();
+    formData.append('userId', form.userId);
+    formData.append('first_name', form.first_name);
+    formData.append('last_name', form.last_name);
+    formData.append('phone_number', form.phone_number);
+    formData.append('email', form.email);
     
-    return this.http.put(Links.UPDATE_STAFF+ `?userId=${data.userId}&first_name=${data.first_name}&last_name=${data.last_name}&phone_number=${data.phone_number}&email=${data.email}`, httpUploadOptions).pipe(map((response: any) => response));
+    return this.http.post(Links.UPDATE_STAFF,formData, httpUploadOptions).pipe(map((response: any) => response));
   }
 
   getStaffById(id: any,) {
@@ -156,6 +155,18 @@ export class AuthService {
     return this.http.delete(Links.DELETE_TRANSITION_BY_ID, httpOptions)
       .pipe(map((response: any) => response));
   }
+
+  statusTransition(id: any,status: any) {
+    return this.http.put(Links.STATUS_CHANGED+ '?transitionId=' + id + '&status=' + status,{},httpUploadOptions)
+      .pipe(map((response: any) => response));
+  }
+
+  SearchTransition(type: any,data: any) {
+    return this.http.get(Links.SEARCH+ '?type=' + type + '&queryString=' + data,httpUploadOptions)
+      .pipe(map((response: any) => response));
+  }
+
+
   //EMOJI
   addEmoji(form: any) {
     const formData = new FormData();

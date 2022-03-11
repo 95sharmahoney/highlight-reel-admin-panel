@@ -32,6 +32,8 @@ export class Links {
     public static GIF_LIST = Links.BASE + '/web/api/admin/get_transitions';
     public static GET_TRANSITION_BY_ID = Links.BASE + '/web/api/admin/get_transitions_by_id';
     public static DELETE_TRANSITION_BY_ID = Links.BASE + '/web/api/admin/delete_transitions';
+    public static STATUS_CHANGED = Links.BASE + '/web/api/admin/active_inactive_transitions';
+    public static SEARCH = Links.BASE + '/web/api/admin/get_transitions';
 
     
     //EMOJI
