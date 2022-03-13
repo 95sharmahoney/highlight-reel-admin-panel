@@ -38,7 +38,6 @@ export class StaffComponent implements OnInit {
     // this.getDetail = sessionStorage.getItem("adminDetail");
     var getDetail = JSON.parse(sessionStorage.getItem('adminDetail') || '{}');
      this.role=getDetail.role
-    console.log(this.role, 'role');
 
     selection = JSON.parse(selection);
     if (selection) {
@@ -60,7 +59,7 @@ export class StaffComponent implements OnInit {
         this.userData = res.data
         // console.log(this.userData,'juned');
 
-        this.noOfRecors = res.totalUser
+        this.noOfRecors = res.totalCount
       } else {
         this.toastr.error(res.message);
       }
@@ -72,9 +71,24 @@ export class StaffComponent implements OnInit {
   }
   getPaginatorData($event: any) {
     this.selection.size = $event.pageSize;
-    this.selection.page = $event.pageIndex;
+    this.selection.page = parseInt($event.pageIndex) + 1;
     sessionStorage.setItem("selection", JSON.stringify(this.selection));
-    this.getAllStaff();
+  
+    this.authService.SearchStaffPagination(this.selection.page).subscribe(res => {
+      this.threeDService.hide();
+      if (res.message == 'Data fetched successfully') {
+        this.userData = res.data
+        // console.log(this.userData,'juned');
+        
+        this.noOfRecors = res.totalCount
+      } else {
+        this.toastr.error(res.message);
+      }
+    }, error => {
+      this.threeDService.hide();
+      this.toastr.error('Technical Issue.')
+      console.log(error);
+    })
   }
   updateFilter() {
     this.selection.page = 0;
@@ -95,11 +109,11 @@ export class StaffComponent implements OnInit {
   //   })
   // }
 
-  changeUserStatus(e: any, id: any) {
+  changeStaffStatus(e: any, id: any) {
     if (e.checked) {
-      this.authService.changeUserStatus(id, 'active').subscribe(
+      this.authService.changeStaffStatus(id, 'active').subscribe(
         res => {
-          if (res.message == 'User status updated successfully') {
+          if (res.success == true) {
             this.toastr.success(res.message)
           } else {
             this.toastr.error(res.message)
@@ -112,9 +126,9 @@ export class StaffComponent implements OnInit {
       )
     }
     else {
-      this.authService.changeUserStatus(id, 'inActive').subscribe(
+      this.authService.changeStaffStatus(id, 'inActive').subscribe(
         res => {
-          if (res.message == 'User status updated successfully') {
+          if (res.success == true) {
             this.toastr.success(res.message)
           } else {
             this.toastr.error(res.message)
@@ -137,5 +151,8 @@ export class StaffComponent implements OnInit {
   }
   viewStaff(userId: any) {
     this.router.navigate(['admin/staff/view-staff'], { queryParams: { id: userId } })
+  }
+  EditStaff(userId: any) {
+    this.router.navigate(['admin/staff/edit-staff'], { queryParams: { id: userId } })
   }
 }

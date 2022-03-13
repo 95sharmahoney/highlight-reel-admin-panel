@@ -57,7 +57,7 @@ export class MusicComponent implements OnInit {
         this.userData = res.data
         // console.log(this.userData,'juned');
         
-        this.noOfRecors = res.totalUser
+        this.noOfRecors = res.totalCount
       } else {
         this.toastr.error(res.message);
       }
@@ -84,7 +84,7 @@ export class MusicComponent implements OnInit {
         this.userData = res.data
         // console.log(this.userData,'juned');
         
-        this.noOfRecors = res.totalUser
+        this.noOfRecors = res.totalCount
       } else {
         this.toastr.error(res.message);
       }
@@ -96,9 +96,24 @@ export class MusicComponent implements OnInit {
   }
   getPaginatorData($event: any) {
     this.selection.size = $event.pageSize;
-    this.selection.page = $event.pageIndex;
+    this.selection.page = parseInt($event.pageIndex) + 1;
     sessionStorage.setItem("selection", JSON.stringify(this.selection));
-    this.getAllGif();
+  
+    this.authService.SearchPagination(this.selection.page,"music",).subscribe(res => {
+      this.threeDService.hide();
+      if (res.message == 'Data fetched successfully') {
+        this.userData = res.data
+        // console.log(this.userData,'juned');
+        
+        this.noOfRecors = res.totalCount
+      } else {
+        this.toastr.error(res.message);
+      }
+    }, error => {
+      this.threeDService.hide();
+      this.toastr.error('Technical Issue.')
+      console.log(error);
+    })
   }
   updateFilter() {
     this.selection.page = 0;

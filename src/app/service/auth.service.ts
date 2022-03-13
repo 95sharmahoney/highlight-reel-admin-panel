@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 
 
 const authToken = sessionStorage.getItem('authToken')
-console.log(authToken, 'authToken');
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -52,6 +51,11 @@ export class AuthService {
     return this.http.get(Links.REPORT_LIST, httpOptions)
       .pipe(map((response: any) => response));
   }
+  SearchReportPagination(page: any) {
+    return this.http.get(Links.SEARCH_REPORT_LIST+ '?page=' + page ,httpUploadOptions)
+      .pipe(map((response: any) => response));
+  }
+
   deleteReport(id: any,data:any) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -77,6 +81,10 @@ export class AuthService {
     return this.http.get(Links.USER_LIST, httpOptions)
       .pipe(map((response: any) => response));
   }
+  SearchUserPagination(page: any) {
+    return this.http.get(Links.SEARCH_USER_LIST+ '?page=' + page ,httpUploadOptions)
+      .pipe(map((response: any) => response));
+  }
   deleteUser(data: any) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -93,6 +101,11 @@ export class AuthService {
   }
   changeUserStatus(data: any, status: any) {
     return this.http.put(Links.CHANGE_USER_STATUS + `?userId=${data}&status=${status}`, {}, httpOptions)
+      .pipe(map((response: any) => response));
+  }
+
+  changeStaffStatus(data: any, status: any) {
+    return this.http.put(Links.CHANGE_STAFF_STATUS + `?userId=${data}&status=${status}`, {}, httpOptions)
       .pipe(map((response: any) => response));
   }
 
@@ -120,6 +133,10 @@ export class AuthService {
   getStaffById(id: any,) {
     return this.http.get(Links.GET_Staff_BY_ID + `/${id}`, httpOptions).pipe(map((response: any) => response));
   }
+  SearchStaffPagination(page: any,) {
+    return this.http.get(Links.SEARCH_Staff_PAGINATION+ '?page=' + page ,httpUploadOptions)
+      .pipe(map((response: any) => response));
+  }
 
   //GIF
   getAllGif(data: any) {
@@ -131,7 +148,6 @@ export class AuthService {
     const formData = new FormData();
     formData.append('files', form.files);
     formData.append('title', form.title);
-    console.log(formData,'form display');
     
     return this.http.post(Links.ADD_GIF, formData, httpUploadOptions).pipe(map((response: any) => response));
   }
@@ -165,9 +181,17 @@ export class AuthService {
     return this.http.get(Links.SEARCH+ '?type=' + type + '&queryString=' + data,httpUploadOptions)
       .pipe(map((response: any) => response));
   }
+  SearchPagination(page: any,type: any,) {
+    return this.http.get(Links.SEARCH+ '?page=' + page + '&type='+type ,httpUploadOptions)
+      .pipe(map((response: any) => response));
+  }
 
 
   //EMOJI
+  getAllEmoji(page: any,data: any) {
+    return this.http.get(Links.GIF_LIST + `?page${page}&type=${data}`, httpOptions)
+      .pipe(map((response: any) => response));
+  }
   addEmoji(form: any) {
     const formData = new FormData();
     formData.append('files', form.files);

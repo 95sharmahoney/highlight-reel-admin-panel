@@ -15,9 +15,9 @@ import { MatSort, Sort } from '@angular/material/sort';
   styleUrls: ['./photos.component.scss']
 })
 export class PhotosComponent implements OnInit {
-  @ViewChild(MatSort) sort !: MatSort;
+  // @ViewChild(MatSort) sort !: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo','firstname', 'updationDate', 'gif','status', 'view',];
+  displayedColumns: string[] = ['sNo', 'firstname', 'updationDate', 'gif', 'status', 'view',];
 
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
@@ -30,17 +30,17 @@ export class PhotosComponent implements OnInit {
 
   ngOnInit(): void {
     // debugger
-    // this.selection = { "page": 0, "size": 10, search: '' };
-    // let selection: any = sessionStorage.getItem("selection");
-    // selection = JSON.parse(selection);
-    // if (selection) {
-    //   this.selection.page = selection.page;
-    //   this.selection.size = selection.size;
-    //   this.selection.search = selection.search;
-    //   this.paginator.pageIndex = selection.page;
-    //   this.paginator.pageSize = selection.size;
-    //   sessionStorage.removeItem("selection");
-    // }
+    this.selection = { "page": 0, "size": 10, search: '' };
+    let selection: any = sessionStorage.getItem("selection");
+    selection = JSON.parse(selection);
+    if (selection) {
+      this.selection.page = selection.page;
+      this.selection.size = selection.size;
+      this.selection.search = selection.search;
+      this.paginator.pageIndex = selection.page;
+      this.paginator.pageSize = selection.size;
+      sessionStorage.removeItem("selection");
+    }
     this.getAllGif();
   }
   getAllGif() {
@@ -50,9 +50,7 @@ export class PhotosComponent implements OnInit {
       this.threeDService.hide();
       if (res.message == 'Data fetched successfully') {
         this.userData = res.data
-        // console.log(this.userData,'juned');
-        
-        this.noOfRecors = res.totalUser
+        this.noOfRecors = res.totalCount
       } else {
         this.toastr.error(res.message);
       }
@@ -63,15 +61,15 @@ export class PhotosComponent implements OnInit {
     })
   }
   searchFilter($event: any) {
-    console.log($event,'search');
+    console.log($event, 'search');
     this.userData = [];
     this.threeDService.show();
-    this.authService.SearchTransition("photos",$event).subscribe(res => {
+    this.authService.SearchTransition("photos", $event).subscribe(res => {
       this.threeDService.hide();
       if (res.message == 'Data fetched successfully') {
         this.userData = res.data
         // console.log(this.userData,'juned');
-        
+
         this.noOfRecors = res.totalCount
       } else {
         this.toastr.error(res.message);
@@ -84,9 +82,24 @@ export class PhotosComponent implements OnInit {
   }
   getPaginatorData($event: any) {
     this.selection.size = $event.pageSize;
-    this.selection.page = $event.pageIndex;
+    this.selection.page = parseInt($event.pageIndex) + 1;
     sessionStorage.setItem("selection", JSON.stringify(this.selection));
-    this.getAllGif();
+
+    this.authService.SearchPagination(this.selection.page, "photos",).subscribe(res => {
+      this.threeDService.hide();
+      if (res.message == 'Data fetched successfully') {
+        this.userData = res.data
+        // console.log(this.userData,'juned');
+
+        this.noOfRecors = res.totalCount
+      } else {
+        this.toastr.error(res.message);
+      }
+    }, error => {
+      this.threeDService.hide();
+      this.toastr.error('Technical Issue.')
+      console.log(error);
+    })
   }
   updateFilter() {
     this.selection.page = 0;
@@ -94,8 +107,7 @@ export class PhotosComponent implements OnInit {
     this.getAllGif();
   }
 
-  onDelete()
-  {
+  onDelete() {
     this.id = this.ID;
     this.threeDService.show();
     this.authService.deleteTransition(this.id).subscribe(res => {
@@ -105,15 +117,15 @@ export class PhotosComponent implements OnInit {
         this.getAllGif();
         this.closePopup();
       }
-      }, error => {
-        this.threeDService.hide();
+    }, error => {
+      this.threeDService.hide();
       console.log(error);
-      });
+    });
   }
 
-  ID:any;
-  openPopup(_id:any) {
-    this.ID=_id;
+  ID: any;
+  openPopup(_id: any) {
+    this.ID = _id;
     this.displayStyle = "block";
   }
 
@@ -125,8 +137,8 @@ export class PhotosComponent implements OnInit {
     this.router.navigate(['admin/photo/add-photo']);
   }
 
-  view(userId:any){
-    this.router.navigate(['admin/photo/view-photo'], {queryParams:{id:userId}})
+  view(userId: any) {
+    this.router.navigate(['admin/photo/view-photo'], { queryParams: { id: userId } })
   }
 
   changeUserStatus(e: any, id: any) {

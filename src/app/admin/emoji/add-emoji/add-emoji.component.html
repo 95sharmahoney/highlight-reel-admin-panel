@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label class="form-label">Upload<span class="required">*</span></label>
                 
-                <input type="file"  #inputFile id="image" (change)="onSelectDoc($event)"> 
+                <input type="file" accept=".gif,.mp4"  #inputFile id="image" (change)="onSelectDoc($event)"> 
                 <span class="validation_msg" *ngIf="!isDoc && isError" >Document is required</span>  
               </div>
         </div> 

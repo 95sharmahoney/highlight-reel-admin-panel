@@ -28,17 +28,7 @@ export class AnimationComponent implements OnInit {
 
   ngOnInit(): void {
     // debugger
-    this.selection = { "page": 0, "size": 10, search: '' };
-    let selection: any = sessionStorage.getItem("selection");
-    selection = JSON.parse(selection);
-    if (selection) {
-      this.selection.page = selection.page;
-      this.selection.size = selection.size;
-      this.selection.search = selection.search;
-      this.paginator.pageIndex = selection.page;
-      this.paginator.pageSize = selection.size;
-      sessionStorage.removeItem("selection");
-    }
+   
     this.getAllGif();
   }
   getAllGif() {
@@ -50,7 +40,7 @@ export class AnimationComponent implements OnInit {
         this.userData = res.data
         // console.log(this.userData,'juned');
         
-        this.noOfRecors = res.totalUser
+        this.noOfRecors = res.totalCount
       } else {
         this.toastr.error(res.message);
       }
@@ -70,7 +60,7 @@ export class AnimationComponent implements OnInit {
         this.userData = res.data
         // console.log(this.userData,'juned');
         
-        this.noOfRecors = res.totalUser
+        this.noOfRecors = res.totalCount
       } else {
         this.toastr.error(res.message);
       }
@@ -82,15 +72,26 @@ export class AnimationComponent implements OnInit {
   }
   getPaginatorData($event: any) {
     this.selection.size = $event.pageSize;
-    this.selection.page = $event.pageIndex;
+    this.selection.page = parseInt($event.pageIndex) + 1;
     sessionStorage.setItem("selection", JSON.stringify(this.selection));
-    this.getAllGif();
+  
+    this.authService.SearchPagination(this.selection.page,"animation",).subscribe(res => {
+      this.threeDService.hide();
+      if (res.message == 'Data fetched successfully') {
+        this.userData = res.data
+        // console.log(this.userData,'juned');
+        
+        this.noOfRecors = res.totalCount
+      } else {
+        this.toastr.error(res.message);
+      }
+    }, error => {
+      this.threeDService.hide();
+      this.toastr.error('Technical Issue.')
+      console.log(error);
+    })
   }
-  updateFilter() {
-    this.selection.page = 0;
-    this.paginator.firstPage();
-    this.getAllGif();
-  }
+  
 
 
   add() {

@@ -1,0 +1,73 @@
+
+h4.card-heading {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    color: #000;
+    background: #fff;
+    border-radius: 3px;
+    font-weight: 600;
+}
+.mat-icon-button {
+    padding: 0;
+    min-width: 0;
+    width: 33px;
+    height: 54px;
+    background-color: antiquewhite;
+    flex-shrink: 0;
+    line-height: 40px;
+    border-radius: 0%;
+}
+.form-group {
+    margin-bottom: 1.6rem;
+}
+.mat-card {
+   
+    padding: 30px;
+    
+}
+label {
+    margin-bottom: 7px;
+}
+
+.sub-menu1 {
+    color: #D85B00;
+}
+
+
+
+
+span.sub-menu1 {
+    color: #D85B00;
+}
+
+
+h4.card-heading .mat-icon {
+    font-size: 18px;
+
+}
+
+.mat-btn{
+    background-color: #FCE101;
+    border-color: #FCE101;
+    color: #000;
+    font-size: 17px;
+    padding: 8px 30px;
+    font-weight: normal;
+    line-height: normal;
+    height: auto;
+}
+.mat-btn:hover {
+    background-color: #D85B00;
+    border-color: #D85B00;
+    color: #fff;
+}
+  .form-group{margin-bottom:1rem}
+  .required{
+    color: red;
+}
+  span.validation_msg{
+    color: #fd021b;
+    margin-top: 10px;
+    font-size: 12px;
+}

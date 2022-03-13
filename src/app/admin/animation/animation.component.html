@@ -76,10 +76,10 @@
                             <div fxLayoutAlign="start center">
                                 <div class="make-ellipse">
                                     <span class="view-btn" matTooltip="View" mat-button
-                                    (click)="view(element._id)"    title="View Profile" matTooltip="View">
+                                    (click)="view(element._id)"    title="View" matTooltip="View">
                                         <mat-icon>remove_red_eye</mat-icon>
                                     </span>
-                                    <span class="view-btn"  matTooltip="View" mat-button (click)="openPopup(element._id)" title="View Profile" matTooltip="View">
+                                    <span class="view-btn"  matTooltip="View" mat-button (click)="openPopup(element._id)" title="delete" matTooltip="View">
                                         <mat-icon class="light">delete</mat-icon>
                                 </span>
                                 </div>
@@ -98,7 +98,7 @@
             </div>
             <div class="pagination">
                 <mat-paginator #paginator [length]="noOfRecors" [pageSize]="selection.size"
-                    [pageSizeOptions]="[10, 25, 50]" (page)="getPaginatorData($event)"></mat-paginator>
+                (page)="getPaginatorData($event)"></mat-paginator>
             </div>
         </div>
 

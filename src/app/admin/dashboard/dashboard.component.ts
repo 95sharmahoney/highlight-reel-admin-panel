@@ -11,7 +11,7 @@ import { ThreeDServiceService } from 'src/app/service/three-dservice.service';
 })
 export class DashboardComponent implements OnInit {
   totalUser: any;
-  totalAdmin: any;
+  staffCount: any;
   constructor(private router: Router, private toastr: ToastrService, public authService: AuthService,
     private route: ActivatedRoute, private ThreeDService: ThreeDServiceService) { }
 
@@ -26,18 +26,18 @@ export class DashboardComponent implements OnInit {
     }
   }
   dashboardCount() {
-    // this.ThreeDService.show();
-  //   this.authService.dashboardCount().subscribe(res => {
-  //     this.ThreeDService.hide();
-  //     if (res.response == 200) {
-  //       this.totalUser = res.data.totalUser;
-  //       this.totalAdmin = res.data.totalAdmin;
-  //     } else {
-  //       this.toastr.error(res.message);
-  //     }
-  //   }, error => {
-  //      this.toastr.error('Internal Server Error');
-  //   })
+    this.ThreeDService.show();
+    this.authService.dashboardCount().subscribe(res => {
+      this.ThreeDService.hide();
+      if (res.success) {
+        this.totalUser = res.data.userCount;
+        this.staffCount = res.data.staffCount;
+      } else {
+        this.toastr.error(res.message);
+      }
+    }, error => {
+       this.toastr.error('Internal Server Error');
+    })
   }
 
 }

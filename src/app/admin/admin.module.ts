@@ -34,6 +34,7 @@ import { AddSoundComponent } from './sound/add-sound/add-sound.component';
 import { AddMusicComponent } from './music/add-music/add-music.component';
 import { AddPhotoComponent } from './photos/add-photo/add-photo.component';
 import { ReportedVideoComponent } from './reported-video/reported-video.component';
+import { ViewStaffComponent } from './staff/view-staff/view-staff.component';
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import { ReportedVideoComponent } from './reported-video/reported-video.componen
     UserDetailsComponent,
     StaffComponent,
     AddStaffComponent,
+    ViewStaffComponent,
     GifComponent,
     AddGifComponent,
     EmojiComponent,

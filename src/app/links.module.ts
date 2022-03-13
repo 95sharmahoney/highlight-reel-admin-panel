@@ -5,7 +5,7 @@ export class Links {
     // public static BASE = 'https://highlightreel.herokuapp.com';
 
     public static LOGIN = Links.BASE + '/web/api/admin/login';
-    public static DASHBOARD_COUNT = Links.BASE + '/admin/dashborad-count';
+    public static DASHBOARD_COUNT = Links.BASE + '/web/api/admin/get_dashboard_val';
     public static CHANGE_PASSWORD = Links.BASE + '/web/api/admin/change_password';
     public static FORGOT_PASSWORD = Links.BASE + '/admin/forgot-password';
     public static RESET_PASSWORD = Links.BASE + '/admin/reset-password';
@@ -15,18 +15,24 @@ export class Links {
     public static USER_LIST = Links.BASE + '/web/api/admin/get_all_users';
     public static DELETE_USER = Links.BASE + '/web/api/admin/delete_user';
     public static CHANGE_USER_STATUS = Links.BASE + '/web/api/admin/change_user_status';
+    public static SEARCH_USER_LIST = Links.BASE + '/web/api/admin/get_all_users';
 
     //REPORTED VIDEO
     public static REPORT_LIST = Links.BASE + '/web/api/admin/get_reported_videos';
     public static DELETE_REPORT = Links.BASE + '/web/api/admin/delete_reported_video';
     public static VIEW_REPORT_BY_ID = Links.BASE + '';
+    public static SEARCH_REPORT_LIST = Links.BASE + '/web/api/admin/get_reported_videos';
 
     //STAFF
     public static USER_STAFF = Links.BASE + '/web/api/admin/get_all_staff';
     public static ADD_STAFF = Links.BASE + '/web/api/admin/register_staff';
     public static GET_Staff_BY_ID = Links.BASE + '/web/api/admin/get_staff_by_id';
     public static UPDATE_STAFF = Links.BASE + '/web/api/admin/edit_staff';
+    public static CHANGE_STAFF_STATUS = Links.BASE + '/web/api/admin/change_staff_status';
+    public static SEARCH_Staff_PAGINATION = Links.BASE + '/web/api/admin/get_all_staff';
 
+    
+    
     //GIF
     public static ADD_GIF = Links.BASE + '/web/api/admin/upload_GIF';
     public static GIF_LIST = Links.BASE + '/web/api/admin/get_transitions';

@@ -31,25 +31,11 @@ export class AddStaffComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.id = this.route.snapshot.queryParamMap.get('id');
-    // this.authService.getStaffById(this.id).subscribe(
-    //   res => {
-    //     let values = res.data
-    //     this.addStaffForm.patchValue({
-    //       userId: values.userId,
-    //       first_name: values.firstName,
-    //       last_name: values.lastName,
-    //       phone_number: values.phoneNumber,
-    //       email: values.email,
-    //     })
-    //   }
-    // )
-
     if (this.router.url.includes('add-staff')) {
       this.pageTitle = 'Add Staff'
     }
-    else if (this.router.url.includes('view-staff')) {
-      this.pageTitle = 'View Staff'
+    else if (this.router.url.includes('edit-staff')) {
+      this.pageTitle = 'Edit Staff'
       this.id = this.route.snapshot.queryParamMap.get('id');
       this.authService.getStaffById(this.id).subscribe(
         res => {

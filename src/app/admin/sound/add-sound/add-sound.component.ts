@@ -94,16 +94,17 @@ export class AddSoundComponent implements OnInit {
 
   onSelectDoc(e:any) {
     var file = e.target.files[0]
-    if (file.size > 5242880) {
-      this.docFile.nativeElement.files = this.unSelectedFile;
-    } else {
+    // if (file.size > 5242880) {
+    //   this.docFile.nativeElement.files = this.unSelectedFile;
+    // }
+    //  else {
       this.docUrl = ''
       this.addGifForm.patchValue({
         files: file
       });
       this.isDoc = true;
 
-    }
+    // }
     console.log("selected Doc", this.addGifForm.value);
   }
 

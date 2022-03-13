@@ -1,0 +1,52 @@
+<div class="mat-new">
+    <h4 class="card-heading">
+        <button mat-icon-button (click)="goBack()">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        Staff<span class="sub-menu1"> > View Staff </span>
+    </h4>
+</div>
+
+<div fxFlex.gt-md="100" fxFlex.gt-sm="100" fxFlex="100">
+    <div class="user-content">
+        <mat-card>
+            <div class="user-info" id="u-info">
+                <div class="row">
+                    <div class="col-2"><b>First Name </b></div>
+                    <div class="col-1"><b>: </b></div>
+                    <div class="col-8">
+                        <p>{{userDetail}} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><b>Email </b></div>
+                    <div class="col-1"><b>: </b></div>
+                    <div class="col-8">
+                        <p style="text-transform: unset !important;">{{email}} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><b>Last Name </b></div>
+                    <div class="col-1"><b>: </b></div>
+                    <div class="col-8">
+                        <p>{{lastName}} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><b>Phone Number </b></div>
+                    <div class="col-1"><b>: </b></div>
+                    <div class="col-8">
+                        <p>{{phoneNumber}} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><b>Role </b></div>
+                    <div class="col-1"><b>: </b></div>
+                    <div class="col-8">
+                        <p>{{role}} </p>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
