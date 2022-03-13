@@ -63,6 +63,23 @@ export class UserManagementComponent implements OnInit {
       console.log(error);
     })
   }
+  searchFilter($event: any) {
+    this.userData = [];
+    this.threeDService.show();
+    this.authService.SearchUser($event.target.value).subscribe(res => {
+      this.threeDService.hide();
+      if (res.success) {
+        this.userData = res.data
+        this.noOfRecors = res.totalCount
+      } else {
+        this.toastr.error(res.message);
+      }
+    }, error => {
+      this.threeDService.hide();
+      this.toastr.error('Technical Issue.')
+      console.log(error);
+    })
+  }
   getPaginatorData($event: any) {
     this.selection.size = $event.pageSize;
     this.selection.page = parseInt($event.pageIndex) + 1;

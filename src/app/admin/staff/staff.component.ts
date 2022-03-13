@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 export class StaffComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator !: MatPaginator;
-  displayedColumns: string[] = ['sNo', 'firstname','lastName', 'email', 'updationDate', 'status', 'action'];
+  displayedColumns: string[] = ['sNo', 'firstname', 'lastName', 'email', 'updationDate', 'status', 'action'];
   userData: any = [];
   dataSource = new MatTableDataSource(this.userData);
   getDetail: any;
@@ -37,7 +37,7 @@ export class StaffComponent implements OnInit {
     let selection: any = sessionStorage.getItem("selection");
     // this.getDetail = sessionStorage.getItem("adminDetail");
     var getDetail = JSON.parse(sessionStorage.getItem('adminDetail') || '{}');
-     this.role=getDetail.role
+    this.role = getDetail.role
 
     selection = JSON.parse(selection);
     if (selection) {
@@ -55,10 +55,27 @@ export class StaffComponent implements OnInit {
     this.threeDService.show();
     this.authService.getAllStaff(this.selection).subscribe(res => {
       this.threeDService.hide();
-      if (res.message == 'Data fetched successfully') {
+      if (res.success) {
         this.userData = res.data
         // console.log(this.userData,'juned');
 
+        this.noOfRecors = res.totalCount
+      } else {
+        this.toastr.error(res.message);
+      }
+    }, error => {
+      this.threeDService.hide();
+      this.toastr.error('Technical Issue.')
+      console.log(error);
+    })
+  }
+  searchFilter($event: any) {
+    this.userData = [];
+    this.threeDService.show();
+    this.authService.SearchStaff($event.target.value).subscribe(res => {
+      this.threeDService.hide();
+      if (res.success) {
+        this.userData = res.data
         this.noOfRecors = res.totalCount
       } else {
         this.toastr.error(res.message);
@@ -73,13 +90,13 @@ export class StaffComponent implements OnInit {
     this.selection.size = $event.pageSize;
     this.selection.page = parseInt($event.pageIndex) + 1;
     sessionStorage.setItem("selection", JSON.stringify(this.selection));
-  
+
     this.authService.SearchStaffPagination(this.selection.page).subscribe(res => {
       this.threeDService.hide();
       if (res.message == 'Data fetched successfully') {
         this.userData = res.data
         // console.log(this.userData,'juned');
-        
+
         this.noOfRecors = res.totalCount
       } else {
         this.toastr.error(res.message);

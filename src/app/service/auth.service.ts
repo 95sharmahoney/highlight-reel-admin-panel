@@ -85,6 +85,10 @@ export class AuthService {
     return this.http.get(Links.SEARCH_USER_LIST+ '?page=' + page ,httpUploadOptions)
       .pipe(map((response: any) => response));
   }
+  SearchUser(data: any) {
+    return this.http.get(Links.USER_LIST+ '?queryString=' + data, httpOptions)
+      .pipe(map((response: any) => response));
+  }
   deleteUser(data: any) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -112,6 +116,10 @@ export class AuthService {
   //STAFF
   getAllStaff(data: any) {
     return this.http.get(Links.USER_STAFF, httpOptions)
+      .pipe(map((response: any) => response));
+  }
+  SearchStaff(data: any) {
+    return this.http.get(Links.USER_STAFF+ '?queryString=' + data, httpOptions)
       .pipe(map((response: any) => response));
   }
 

@@ -4,10 +4,10 @@
 			<mat-form-field class="full-wid search-wid own-clas set-search-box-matField" floatLabel="never">
 				<div class="srch">
 					<input matInput placeholder="Search" [(ngModel)]="selection.search" class="search_input"
-						(change)='updateFilter()'>
+						(change)='searchFilter($event)'>
 					<mat-icon
 						class="edit-color search-icon mat-icon notranslate ng-tns-c31-16 material-icons mat-icon-no-color"
-						role="img" style="cursor: pointer;" aria-hidden="true" (click)="updateFilter()">search
+						role="img" style="cursor: pointer;" aria-hidden="true" (click)="searchFilter($event)">search
 					</mat-icon>
 				</div>
 			</mat-form-field>
